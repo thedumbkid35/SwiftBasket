@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+<link rel="stylesheet" href="/css/styles.css" />
+
+
+<h1>Products</h1>
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
+
+<% if (success) { %>
+  <p class="success-message"><%= success %></p>
+<% } %>
+<div class="products-container">
+  <% products.forEach(product => { %>
+    <div class="product-card">
+      <img src="<%= product.imageUrl %>" class="product-img" alt="<%= product.name %>"/>
+      <h2><%= product.name %></h2>
+      <p><%= product.description %></p>
+      <p>₹<%= product.price %></p>
+      <form method="POST" action="/cart/add/<%= product.id %>">
+        <label for="qty-<%= product.id %>">Quantity:</label>
+        <input type="number" name="quantity" id="qty-<%= product.id %>" value="1" min="1" required>
+        <button>Add to Cart</button>
+      </form>
+    </div>
+  <% }) %>
+
+</div>

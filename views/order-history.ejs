@@ -1,0 +1,27 @@
+<%- include("partials/header") %>
+<link rel="stylesheet" href="/css/order-history.css" />
+
+<h1>Order History</h1>
+
+<% if (orders.length === 0) { %>
+  <p class="empty-message">No orders placed yet.</p>
+<% } else { %>
+  <div class="order-history-container">
+    <% orders.forEach(order => { %>
+      <div class="order-card">
+        <h3>Order ID: <%= order.orderNumber %></h3>
+        <ul>
+          <% order.products.forEach(item => { %>
+            <li><%= item.quantity %> × <%= item.name %> (₹<%= item.price %>)</li>
+          <% }) %>
+        </ul>
+        <p><strong>Total: ₹<%= order.totalAmount %></strong></p>
+        <p class="date">Placed on: <%= order.createdAt.toLocaleString() %>
+        </p>
+        <p>Address: <%= order.address %></p>
+<p>📞 Phone: <%= order.phone %></p>
+
+      </div>
+    <% }) %>
+  </div>
+<% } %>

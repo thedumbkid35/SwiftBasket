@@ -1,0 +1,59 @@
+<%- include("partials/header") %>
+<link rel="stylesheet" href="/css/cart.css" />
+
+<h1>Your Cart</h1>
+
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
+
+<% if (success) { %>
+  <p class="success-message"><%= success %></p>
+<% } %>
+
+<% if (cart.length === 0 && success && success.includes("Order placed successfully")) { %>
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <ul>
+      <% const orderItems = JSON.parse(orderProducts || "[]"); %>
+      <% orderItems.forEach(item => { %>
+        <li><%= item.quantity %> × <%= item.name %> (₹<%= item.price %>) = ₹<%= item.price * item.quantity %></li>
+      <% }) %>
+    </ul>
+    <strong>Total Paid: ₹<%= orderTotal %></strong>
+    <br />
+    
+    <strong class="scan">Scan & Pay through:</strong>
+    <img src="/assets/images/Scan.jpeg" alt="qr-code" class="qr-code">
+  </div>
+<% } else if (cart.length === 0) { %>
+  <p class="empty-message">No items in cart.</p>
+<% } else { %>
+  <% cart.forEach(item => { %>
+    <div class="cart-item">
+      <img src="<%= item.imageUrl %>" alt="<%= item.name %>" />
+      <div class="cart-item-details">
+        <p><strong><%= item.name %></strong></p>
+        <p>₹<%= item.price %> × <%= item.quantity %> = ₹<%= item.price * item.quantity %></p>
+        <form method="POST" action="/cart/remove/<%= item.id %>">
+          <button>Remove</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+
+  <h3 style="text-align: center;">Total: ₹<%= total %></h3>
+
+  <form method="POST" action="/cart/checkout">
+  <div>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" name="phone" id="phone" required pattern="[0-9]{10}" placeholder="10-digit number" />
+  </div>
+  <div>
+    <label for="address">Delivery Address:</label>
+    <textarea name="address" id="address" rows="3" required placeholder="Full delivery address"></textarea>
+  </div>
+  <button>Buy</button>
+</form>
+
+<% } %>
