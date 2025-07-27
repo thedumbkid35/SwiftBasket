@@ -1,8 +1,6 @@
-/* -------------------- */
-/* Header Navigation (Warm Themed) */
-/* -------------------- */
+
 .main-nav {
-  background-color: #f0e8e3; /* warm light beige */
+  background-color: #f0e8e3; 
   padding: 10px 20px;
   display: flex;
   justify-content: flex-start;
@@ -13,7 +11,7 @@
 }
 
 .main-nav a {
-  color: #5c4033; /* dark brown */
+  color: #5c4033;
   text-decoration: none;
   font-weight: 500;
   padding: 5px 10px;
@@ -22,12 +20,12 @@
 }
 
 .main-nav a:hover {
-  background-color: #e2d6cd; /* soft tan */
-  color: #3e2a21; /* darker brown */
+  background-color: #e2d6cd; 
+  color: #3e2a21; 
 }
 
 .main-nav span {
-  color: #a38878; /* muted warm tone */
+  color: #a38878;
 }
 
 .main-nav {
